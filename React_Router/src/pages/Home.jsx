@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-export default function HomePage(){
-    return(
+export default function HomePage() {
+    return (
         <>
-        <h1>My Home Page!</h1>
-        <p>Go to <Link to="/products"> The List of Products</Link>.</p>
+            <h1>My Home Page!</h1>
+            <p>Go to <Link to="/products"> The List of Products</Link>.</p>
         </>
-    )
+    );
 }
