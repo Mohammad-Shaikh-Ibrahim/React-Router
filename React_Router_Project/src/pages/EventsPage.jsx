@@ -16,6 +16,9 @@ export default EventsPage;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
+    //in this function you can use any Browser api like : localStorge,...  
+    //but you cant use hooks like : useState,...
+
     const response = await fetch('http://localhost:8081/events');
 
     if (!response.ok) {
