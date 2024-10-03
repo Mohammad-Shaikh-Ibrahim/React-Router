@@ -13,7 +13,7 @@
 //    - /events/new => NewEventPage
 //    - /events/<some-id>/edit => EditEventPage
 // 3. Add a root layout that adds the <MainNavigation> component above all page components
-// e MainNavigati4. Add properly working links to thon
+// 4. Add properly working links to the MainNavigation
 // 5. Ensure that the links in MainNavigation receive an "active" class when active
 // 6. Output a list of dummy events to the EventsPage
 //    Every list item should include a link to the respective EventDetailPage
@@ -27,15 +27,24 @@ import EventDetaiPage from "./pages/EventDetailPage";
 import NewEventPage from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
 import RootLayoutPage from "./pages/RootLayout";
+import EventsRootPage from "./pages/EventsRoot";
 
 const router = createBrowserRouter([
   {
-    path: '/', element: <RootLayoutPage />, children: [
+    path: '/',
+    element: <RootLayoutPage />,
+    children: [
       { index: true, element: <HomePage /> },
-      { path: 'events', element: <EventsPage /> },
-      { path: 'events/:eventId', element: <EventDetaiPage /> },
-      { path: 'events/:new', element: <NewEventPage /> },
-      { path: 'events/:eventId/edit', element: <EditEventPage /> },
+      {
+        path: 'events',
+        element: <EventsRootPage />,
+        children: [
+          { index: true, element: <EventsPage /> },
+          { path: ':eventId', element: <EventDetaiPage /> },
+          { path: 'new', element: <NewEventPage /> },
+          { path: ':eventId/edit', element: <EditEventPage /> },
+        ]
+      },
     ]
   },
 
