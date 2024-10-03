@@ -1,6 +1,11 @@
+/* eslint-disable react/prop-types */
+// import { useLoaderData } from 'react-router-dom';
+
+
 import classes from './EventsList.module.css';
 
-function EventsList({ events }) {
+function EventsList({events}) {
+  // const events = useLoaderData();
   return (
     <div className={classes.events}>
       <h1>All Events</h1>
