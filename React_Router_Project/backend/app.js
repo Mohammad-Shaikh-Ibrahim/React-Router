@@ -2,12 +2,12 @@
 /* eslint-disable no-undef */
 const bodyParser = require('body-parser');
 const express = require('express');
-
 const eventRoutes = require('./routes/events');
 
 const app = express();
 
 app.use(bodyParser.json());
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
@@ -23,4 +23,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message });
 });
 
-app.listen(8081);
+const port = process.env.PORT || 8081;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
