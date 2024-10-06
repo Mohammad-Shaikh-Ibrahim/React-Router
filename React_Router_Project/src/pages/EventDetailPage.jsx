@@ -1,12 +1,12 @@
-import { useLoaderData, json } from "react-router-dom";
+import { useRouteLoaderData, json } from "react-router-dom";
 import EventItem from '../components/EventItem'
 
 export default function EventDetaiPage() {
-    const data = useLoaderData();
+    const data = useRouteLoaderData('event-detail');
 
     return (
         <>
-            <EventItem event={ data.event} />
+            <EventItem event={data.event} />
         </>
     );
 }
@@ -22,7 +22,7 @@ export async function loader({ request, params }) {
             { status: 500 }
         )
     } else {
-
+        //...
     }
     return response;
 }
