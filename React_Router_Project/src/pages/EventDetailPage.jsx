@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable no-unused-vars */
 import { useRouteLoaderData, json } from "react-router-dom";
 import EventItem from '../components/EventItem'
 
