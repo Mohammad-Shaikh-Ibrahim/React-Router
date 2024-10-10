@@ -11,7 +11,7 @@ export default function NewEventPage() {
 
 export async function action({request, params}) {
     const data = request.formData();
-    const enteredData = {
+    const eventData = {
         title: data.get('title'),
         image: data.get('image'),
         date: data.get('date'),
@@ -22,11 +22,11 @@ export async function action({request, params}) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(enteredData)
+        body: JSON.stringify(eventData)
     });
 
     if (!response.ok) {
-        throw json({ message: 'Could Not Save Event' }, { status: 500 })
+        throw json({ message: 'Could Not Save Event' }, { status: 500 });
     }
     return redirect('/events');
 }
