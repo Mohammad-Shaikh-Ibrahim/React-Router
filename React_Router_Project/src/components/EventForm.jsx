@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { Form, useNavigation } from 'react-router-dom';
+import { Form, useNavigation,useActionData } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
+  const data = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   function cancelHandler() {
@@ -16,6 +17,9 @@ function EventForm({ method, event }) {
     <Form
       method='post'
       className={classes.form}>
+        {data && data.errors && <ul>
+          {Object.values(data.errors).map(err => <li key={err}>{err}</li>)}
+        </ul> }
       <p>
         <label htmlFor="title">Title</label>
         <input

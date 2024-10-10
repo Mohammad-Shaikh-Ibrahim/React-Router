@@ -1,16 +1,17 @@
-// Import necessary modules and functions
-import express from "express";
-import { getAll, get, add, replace, remove } from "../data/event.js";
-import { isValidText, isValidDate, isValidImageUrl } from "../util/validation.js";
+const express = require("express");
 
-// Create a new Express router
+const { getAll, get, add, replace, remove } = require("../data/event");
+const {
+  isValidText,
+  isValidDate,
+  isValidImageUrl,
+} = require("../util/validation");
+
 const router = express.Router();
 
-// GET all events
 router.get("/", async (req, res, next) => {
   try {
     const events = await getAll();
-    // Uncomment if you want to simulate a delay
     // setTimeout(() => {
     //   res.json({ events: events });
     // }, 1500);
@@ -20,7 +21,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// GET a specific event by ID
 router.get("/:id", async (req, res, next) => {
   try {
     const event = await get(req.params.id);
@@ -30,20 +30,23 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// POST (add) a new event
 router.post("/", async (req, res, next) => {
   const data = req.body;
+
   let errors = {};
 
   if (!isValidText(data.title)) {
     errors.title = "Invalid title.";
   }
+
   if (!isValidText(data.description)) {
     errors.description = "Invalid description.";
   }
+
   if (!isValidDate(data.date)) {
     errors.date = "Invalid date.";
   }
+
   if (!isValidImageUrl(data.image)) {
     errors.image = "Invalid image.";
   }
@@ -63,20 +66,23 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// PATCH (update) an event by ID
 router.patch("/:id", async (req, res, next) => {
   const data = req.body;
+
   let errors = {};
 
   if (!isValidText(data.title)) {
     errors.title = "Invalid title.";
   }
+
   if (!isValidText(data.description)) {
     errors.description = "Invalid description.";
   }
+
   if (!isValidDate(data.date)) {
     errors.date = "Invalid date.";
   }
+
   if (!isValidImageUrl(data.image)) {
     errors.image = "Invalid image.";
   }
@@ -96,7 +102,6 @@ router.patch("/:id", async (req, res, next) => {
   }
 });
 
-// DELETE an event by ID
 router.delete("/:id", async (req, res, next) => {
   try {
     await remove(req.params.id);
@@ -106,5 +111,4 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-// Export the router as the default export
-export default router;
+module.exports = router;
