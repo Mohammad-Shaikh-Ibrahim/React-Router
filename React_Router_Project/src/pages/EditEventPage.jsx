@@ -5,7 +5,7 @@ export default function EditEventPage() {
     const event = data.event;
     return (
         <>
-            <EditForm event={event} />
+            <EditForm method='patch' event={event} />
         </>
     );
 }

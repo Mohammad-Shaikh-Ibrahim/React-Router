@@ -43,6 +43,7 @@ export async function action({ params }) {
         method: 'DELETE', // Use DELETE method
     });
 
+
     // Handle non-OK responses
     if (!response.ok) {
         throw json(
