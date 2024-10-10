@@ -1,25 +1,25 @@
-import { json, useLoaderData } from 'react-router-dom';
+import { Await, defer, json, useLoaderData } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
+import { Suspense } from 'react';
 
 function EventsPage() {
-    const data = useLoaderData();
-    const events = data.events;
+    const { events } = useLoaderData();
 
-    // if (data.isError) {
-    //     return <p>{data.message}</p>
-    // }
     return (
         <>
-            <EventsList events={events} />
+            <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
+                <Await resolve={events}>
+                    {(loadedEvents) => <EventsList events={loadedEvents} />}
+                </Await>
+            </Suspense>
         </>
     );
 }
 
 export default EventsPage;
 
-// eslint-disable-next-line react-refresh/only-export-components
-export async function loader() {
+async function loadEvents() {
     //in this function you can use any Browser api like : localStorge,...  
     //but you cant use hooks like : useState,...
 
@@ -35,7 +35,13 @@ export async function loader() {
         // const resData = await response.json();
         // const res = new Response('any data', { status: 201 });
         // return res;
-
-        return response;
+        const resData = await response.json();
+        return resData.events;
     }
+}
+
+export function loader() {
+    return defer({
+        events: loadEvents(),
+    })
 }
