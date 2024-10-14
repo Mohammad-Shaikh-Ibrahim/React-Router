@@ -94,11 +94,11 @@ export async function action({ request, params }) {
     description: data.get('description'),
   };
 
-  let url = 'http://localhost:8081/events';
+  let url = 'http://localhost:3000/events';
 
   if (method === 'PATCH') {
     const eventId = params.eventId;
-    url = 'http://localhost:8081/events/' + eventId;
+    url = 'http://localhost:3000/events/' + eventId;
   }
 
   const response = await fetch(url, {
@@ -119,3 +119,4 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
+
