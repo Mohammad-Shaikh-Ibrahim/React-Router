@@ -83,8 +83,8 @@ export async function action({ params, request }) {
   const token = getAuthToken();
   const response = await fetch('http://localhost:3000/events/' + eventId, {
     method: request.method,
-    headers:{
-      'Authorization': 'Bearer'+ token
+    headers: {
+      'Authorization': 'Bearer ' + token
     }
   });
 

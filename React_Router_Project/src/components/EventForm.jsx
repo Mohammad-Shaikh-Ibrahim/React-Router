@@ -7,8 +7,8 @@ import {
   redirect
 } from 'react-router-dom';
 
-import classes from './EventForm.module.css';
 import { getAuthToken } from '../util/auth';
+import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
   const data = useActionData();
@@ -107,7 +107,7 @@ export async function action({ request, params }) {
     method: method,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer'+ token
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(eventData),
   });
@@ -122,4 +122,3 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
-

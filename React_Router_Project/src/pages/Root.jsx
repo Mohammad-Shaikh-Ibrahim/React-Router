@@ -1,11 +1,11 @@
-import { Outlet, useRouteLoaderData, useSubmit } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
 
 import MainNavigation from '../components/MainNavigation';
-import { useEffect } from 'react';
 import { getTokenDuration } from '../util/auth';
 
 function RootLayout() {
-  const token = useRouteLoaderData();
+  const token = useLoaderData();
   const submit = useSubmit();
   // const navigation = useNavigation();
   useEffect(() => {
@@ -20,14 +20,13 @@ function RootLayout() {
 
     const tokenDuration = getTokenDuration();
     console.log(tokenDuration);
-    
 
     setTimeout(() => {
       submit(null, { action: '/logout', method: 'post' });
     }, tokenDuration);
-  }, [token, submit])
-  return (
+  }, [token, submit]);
 
+  return (
     <>
       <MainNavigation />
       <main>
